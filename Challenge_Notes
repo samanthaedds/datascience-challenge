@@ -1,5 +1,8 @@
 # This file details my thought process and augmentations for: Cleaning, Features, Modeling, Efficiency, Cross-Validation, Output, Production
 
+Overview: I interpreted the post most relates to, to be positive or negative. If a con is, say, nepotism, and that is most of what they say, the post is related to integrity.
+That being said I needed to do a better job pulling out the latent compenents that drive the overarching theme.
+
 Cleaning: Clean text by removing stopwords (only in English), punctuation, and lowering letters; break out pros and cons separately.
 Cleaning improvements(1): Incorporate multiple languages
 Cleaning improvements(2): My pros/cons split assumes 'pros' are first, and that the words 'pros' and 'cons' are used. Could use sentiment to help check this.
