@@ -1,0 +1,35 @@
+# This file details my thought process and augmentations for: Cleaning, Features, Modeling, Efficiency, Cross-Validation, Output, Production
+
+Cleaning: Clean text by removing stopwords (only in English), punctuation, and lowering letters; break out pros and cons separately.
+Cleaning improvements(1): Incorporate multiple languages
+Cleaning improvements(2): My pros/cons split assumes 'pros' are first, and that the words 'pros' and 'cons' are used. Could use sentiment to help check this.
+
+Features: Unigrams and bigrams with TF-IDF and set a minimum percentage for rare words; punctuation that may be an indicator of strong feelings
+Features, ctd: How positive/negative/neutral the pros and cons statements on basd on a scale; word type (ex. verb, noun, etc. for cons)
+Feature improvements(1): Test more parameters for TF-IDF features
+Feature improvements(2): Use Lasso or Ridge regression to figure out what variables matter for punctuation, sentiment, etc.
+Feature improvements(3): Using the character instead of number for ngrams
+
+Why these: I thought about what denotes each of the 6 dimensions, and how to extract that. 
+The sentiment around pros/cons seems important because that can show if the company took action or only cared about say results.
+Additionally I included type of punctuation because I can imagine certain dimensions also map to these in a latent fashion. 
+I included type of words to describe the companies may also indicate principled or not. 
+
+Modeling: I chose to use Support Vector Classification because it is generally good for non-linear data, and you can use counts / tf-idf to create distances.
+I also tried gradient boosting which is often used on unbalanced data, but with much worse results.
+
+Modeling improvements(1): Try additional methods beyond SVC. Could try some form of neural nets, KNN, etc.
+
+Efficiency: The last part of the code struggle locally on my machine. Optimization opportunities exist particularly in the class feature piece.
+
+Cross-Validation: I did CV on the classifier because I hadn't use pipeline with my own features. 
+I haven't worked with a dataset this size for NLP. Before I would make sparse arrays and all features myself, not putting them into the pipeline.
+With that takes some time and I had written too much code and needed less for piping. Given the time it took I decided to stop there and call it.
+CV improvements(1): At a minimum add more params for n-grams
+
+Output: The in-sample results do not hit 90% accuracy. With everything described above it took over 5 hours already so I didn't add or adjust features.
+Output improvments(1): Create a measure of variable importance and look at other potential features to create (e.g. phrase relevance)
+
+Production environment: To put this into production the code needs to be completely built in functions that have set defaults. 
+There cannot be human judgement in the process until output. It would also need to include value and type error checkings.
+It would also need to be scalable (see efficiency notes) as well in terms of run time.
